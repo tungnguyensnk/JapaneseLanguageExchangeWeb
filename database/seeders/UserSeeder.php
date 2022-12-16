@@ -17,6 +17,20 @@ class UserSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('vi_VN');
+        // admin
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@mail.com',
+            'password' => bcrypt('123456'),
+            'created_at' => $faker->dateTime,
+            'updated_at' => $faker->dateTime,
+            'user_name' => 'admin',
+            'phone' => $faker->phoneNumber,
+            'address' => $faker->address,
+            'role' => 1,
+            'deleted' => 0,
+            'avatar' => $faker->name
+        ]);
         $limit = 10;
         for ($i = 0; $i < $limit; $i++) {
             DB::table('users')->insert([
