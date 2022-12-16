@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => $faker->name,
                 'email' => $faker->unique()->email,
-                'password' => $faker->password,
+                'password' => bcrypt('123456'),
                 'created_at' => $faker->dateTime,
                 'updated_at' => $faker->dateTime,
                 'user_name' => $faker->userName,

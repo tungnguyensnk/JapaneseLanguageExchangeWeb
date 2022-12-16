@@ -25,7 +25,9 @@ class PostSeeder extends Seeder
                     'title' => $faker->sentence,
                     'content' => $faker->paragraph,
                     'type' => $faker->randomElement(['post', 'page']),
-                    'deleted' => $faker->boolean
+                    'deleted' => $faker->boolean,
+                    'views' => $faker->numberBetween(0, 1000),
+                    'locked' => $faker->boolean
                 ]);
             }
         }

@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             ChatSeeder::class,
             BookmarkSeeder::class,
             PostReportSeeder::class,
-            CommentReportSeeder::class
+            CommentReportSeeder::class,
+            NotificationWebSeeder::class,
         ]);
     }
 }

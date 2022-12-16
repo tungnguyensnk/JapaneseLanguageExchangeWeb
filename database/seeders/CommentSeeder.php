@@ -26,6 +26,12 @@ class CommentSeeder extends Seeder
                     'post_id' => $post->id,
                     'content' => $faker->text
                 ]);
+                DB::table('comments')->insert([
+                    'user_id' => $user->id,
+                    'post_id' => $post->id,
+                    'content' => $faker->text,
+                    'parent_id' => $faker->randomElement(DB::table('comments')->where('post_id', $post->id)->get())->id
+                ]);
             }
         }
     }

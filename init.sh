@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+docker rm --force --volumes web postgres app
+docker volume prune -f
 docker-compose up --build -d
 #docker-compose exec app composer update
 docker-compose exec app composer install --no-scripts

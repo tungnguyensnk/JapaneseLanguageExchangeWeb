@@ -16,14 +16,18 @@ class LikeCommentSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create('vi_VN');
         $users = DB::table('users')->get();
         $comments = DB::table('comments')->get();
         foreach ($comments as $comment) {
             foreach ($users as $user) {
-                DB::table('like_comment')->insert([
-                    'user_id' => $user->id,
-                    'comment_id' => $comment->id
-                ]);
+                if ($faker->numberBetween(0, 1) == 1) {
+                    DB::table('like_comment')->insert([
+                        'user_id' => $user->id,
+                        'comment_id' => $comment->id
+                    ]);
+                }
+
             }
         }
     }

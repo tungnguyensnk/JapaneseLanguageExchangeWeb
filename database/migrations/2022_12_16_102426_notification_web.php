@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,18 +13,20 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        //id
+        //user_id
+        //content
+        //link
+        //is_seen
+        //create_at
+
+        Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('user_id')->constrained('users');
-            $table->string('title');
-            $table->text('content');
+            $table->string('content');
+            $table->string('link');
+            $table->boolean('is_seen')->default(false);
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
-            $table->string('type');
-            $table->integer('views');
-            $table->boolean('deleted');
-            $table->boolean('locked');
-
         });
     }
 
@@ -34,6 +37,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('notifications');
     }
 };
