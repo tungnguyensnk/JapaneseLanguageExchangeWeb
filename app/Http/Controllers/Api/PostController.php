@@ -8,7 +8,6 @@ use App\Models\LikePost;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
