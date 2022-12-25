@@ -1,0 +1,11 @@
+{
+  "name": "webrtc-video-call",
+  "version": "0.0.0",
+  "description": "A simple WebSocket-based server with two-way WebRTC video call",
+  "license": "MIT",
+  "dependencies": {
+    "node-static": "^0.7.11",
+    "webrtc-adapter": "^8.2.0",
+    "websocket": "^1.0.34"
+  }
+}

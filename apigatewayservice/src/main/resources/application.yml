@@ -1,0 +1,22 @@
+spring:
+    cloud:
+        gateway:
+            routes:
+                -   id: coreService
+                    uri: http://nginx
+                    predicates:
+                        - Path=/core/**
+                    filters:
+                        - RewritePath=/core/(?<path>.*), /api/$\{path}
+                -   id: VideoService
+                    uri: http://videoCallService
+                    predicates:
+                        - Path=/video/**
+                    filters:
+                        - RewritePath=/video/(?<path>.*), /$\{path}
+                -   id: socketVideoService
+                    uri: ws://videoCallService
+                    predicates:
+                        - Path=/video/**
+                    filters:
+                        - RewritePath=/video/(?<path>.*), /$\{path}

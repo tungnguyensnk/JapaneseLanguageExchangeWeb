@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: coreService
+          uri: ${LOCAL}:8081/
+          predicates:
+            - Path=/core/**
+          filters:
+            - RewritePath=/core/(?<path>.*), /api/$\{path}
+        - id: VideoService
+          uri: ${LOCAL}:8082/
+          predicates:
+            - Path=/video/**
+          filters:
+            - RewritePath=/video/(?<path>.*), /$\{path}

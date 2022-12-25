@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style.css" rel="stylesheet">
+    <title>Video Call</title>
+</head>
+<body>
+<p>Enter a username: <input id="name" type="text" maxlength="12" required
+                            autocomplete="username" inputmode="verbatim" placeholder="Username">
+    <input type="button" name="login" value="Log in" onclick="connect()"></p>
+
+<div id="container" class="flexChild columnParent">
+    <div class="flexChild rowParent">
+        <div class="flexChild" id="userlist-container">
+            <ul id="userlistbox"></ul>
+        </div>
+    </div>
+
+    <div class="flexChild" id="camera-container">
+        <div class="camera-box">
+            <video id="received_video" autoplay></video>
+            <video id="local_video" autoplay muted></video>
+            <button id="hangup-button" onclick="hangUpCall();" disabled>
+                End
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="videocall.js"></script>
+<script type="text/javascript" src="adapter.js"></script>
+</html>
