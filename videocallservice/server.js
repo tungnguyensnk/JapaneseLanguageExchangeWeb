@@ -2,9 +2,18 @@
 
 const http = require('http');
 const nodeStatic = require('node-static');
-const fs = require("fs");
+const {Client} = require('pg');
+require('dotenv').config();
 const WebSocketServer = require('websocket').server;
 
+const client = new Client({
+    user: process.env.DB_USERNAME,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+});
+client.connect();
 
 // su dung de tao ra 1 mang luu tru cac ket noi
 let connectionArray = [];
@@ -40,7 +49,7 @@ function sendUserListToAll() {
 
 let fileServer = new (nodeStatic.Server)();
 
-let server = http.createServer( (req, res) => fileServer.serve(req, res))
+let server = http.createServer((req, res) => fileServer.serve(req, res))
     .listen(80, () => log("Server is listening on port 80"));
 
 // Tao ra 1 websocket server
@@ -55,6 +64,10 @@ if (!ws) {
 
 // Khi co 1 client ket noi den server
 ws.on('request', request => {
+    client.query('SELECT * FROM table', (err, res) => {
+        console.log(err, res);
+        client.end();
+    });
     // Chap nhan ket noi
     let connection = request.accept("json", request.origin);
 
