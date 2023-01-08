@@ -6,7 +6,8 @@ services:
             context: ./coreservice
             dockerfile: Dockerfile
         image: coreservice
-        working_dir: /var/www/code
+        working_dir: /var/www/html
+        user: "1000:1000"
         entrypoint: /bin/sh -c "composer install &&
             php artisan key:generate &&
             php artisan migrate &&
@@ -14,7 +15,7 @@ services:
             php artisan optimize &&
             php-fpm"
         volumes:
-            - ./coreservice:/var/www/code
+            - ./coreservice:/var/www/html
         networks:
             - ltweb-network
         depends_on:
@@ -26,7 +27,7 @@ services:
         ports:
             - "8881:80"
         volumes:
-            - ./coreservice:/var/www/code
+            - ./coreservice:/var/www/html
             - ./coreservice/nginx.conf:/etc/nginx/conf.d/default.conf
         networks:
             - ltweb-network
