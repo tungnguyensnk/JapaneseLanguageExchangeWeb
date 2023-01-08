@@ -11,3 +11,5 @@ RUN docker-php-ext-install pdo pdo_pgsql
 
 # Copy existing application directory
 COPY . .
+
+RUN chmod -R 777 storage bootstrap/cache storage/framework/views storage/framework/sessions storage/framework/cache storage/logs/laravel.log
