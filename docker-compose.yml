@@ -8,7 +8,7 @@ services:
         image: coreservice
         working_dir: /var/www/html
         user: "1000:1000"
-        entrypoint: /bin/sh -c "composer install &&
+        entrypoint: /bin/sh -c "sudo composer install &&
             php artisan key:generate &&
             php artisan migrate &&
             php artisan db:seed &&
