@@ -1,0 +1,26 @@
+.faq-item-card {
+    box-shadow: 0px 0px 5px #aaaaaa;
+    border: 1px solid #ccc5c5;
+    width: 22%; 
+}
+
+.faq-item-card__body {
+    padding: 10px 20px 10px 20px;
+}
+
+.faq-item-card__title {
+    font-size: 1rem;
+    font-weight: bold; 
+    margin-bottom:5px;
+}
+
+.faq-item-card__name {
+    color: #0a5bd8;
+    margin-bottom: 5px;
+}
+
+.faq-item-card-icon {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+}

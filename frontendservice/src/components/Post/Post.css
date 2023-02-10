@@ -1,0 +1,59 @@
+@import "../../index.css";
+
+.faq-post-ov {
+  padding: 30px 0;
+  max-width: 700px;
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid var(--color-gray-tertiary--);
+}
+
+.faq-post-ov .faq-post-ov__avatar {
+  width: 50px;
+}
+
+.faq-post-ov .faq-post-ov__name {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-blue-secondary--);
+}
+
+.faq-post-ov .faq-post-ov__datetime {
+  font-size: 12px;
+  opacity: .5;
+  margin-left: 20px;
+}
+
+.faq-post-ov .faq-post-ov__title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.faq-post-ov .faq-post-ov__tag {
+  font-size: 12px;
+  color: var(--color-gray-primary--);
+  padding: 3px 5px;
+  border-radius: 4px;
+  background-color: var(--color-gray-secondary--);
+  margin-right: 8px;
+}
+
+.faq-post-ov .faq-post-ov__reacts {
+  margin: 10px 0;
+}
+
+.faq-post-ov__reacts * {
+  font-size: 15px;
+  color: var(--color-gray-primary--);
+}
+
+.faq-post-ov__bookmark {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+}
+
+.faq-post-ov__content {
+  color: #9b9b9b;
+  font-size: 15px;
+}

@@ -1,0 +1,22 @@
+@import "../../index.css";
+@import "../Post/Post.css";
+
+.faq-newest-qt {
+  overflow: hidden;
+}
+
+.faq-newest-qt .faq-newest-qt__item {
+  border-bottom-width: 1px;
+}
+
+
+.faq-newest-qt .faq-newest-qt__title {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.faq-newest-qt .faq-newest-qt__name {
+  font-size: 14px;
+  opacity: .6;
+  margin-top: 10px;
+}

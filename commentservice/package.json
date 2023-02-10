@@ -1,0 +1,11 @@
+{
+  "name": "commentservice",
+  "version": "0.0.1",
+  "description": "Comment service",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.1",
+    "pg": "^8.9.0"
+  }
+}

@@ -1,0 +1,8 @@
+
+@import "../../index.css";
+
+.faq-icon {
+  margin: 0 5px;
+  cursor: pointer;
+  display: inline-block;
+}

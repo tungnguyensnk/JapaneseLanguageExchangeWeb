@@ -1,0 +1,7 @@
+@import "../../index.css";
+
+.faq-btn:hover {
+  transition: all .3s ease;
+  outline: 2px solid var(--color-blue-primary--);
+  outline-offset: 4px;
+}

@@ -1,0 +1,21 @@
+
+.faq-img {
+  width: 3rem;
+  height: auto;
+  margin: 0 auto;
+}
+
+.faq-header__navigation {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.faq-header__navigation .faq-header__link {
+  cursor: pointer;
+  border-bottom: 2px solid white;
+  transition: all .2s ease;
+}
+
+.faq-header__navigation .faq-header__link:hover {
+  border-bottom: 2px solid blue;
+}

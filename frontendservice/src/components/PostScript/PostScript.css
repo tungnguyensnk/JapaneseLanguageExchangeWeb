@@ -1,0 +1,29 @@
+@import "../../index.css";
+
+
+.faq-post-ovv {
+  padding: 30px 0;
+  max-width: 660px;
+  width: 100%;
+  position: relative;
+}
+
+.faq-header-blog {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+
+.faq-tags-and-menu {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+}
+.faq-title-blog {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.faq-description {
+  font-size: 1rem;
+}

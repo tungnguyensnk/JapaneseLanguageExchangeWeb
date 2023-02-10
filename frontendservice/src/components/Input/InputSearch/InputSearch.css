@@ -1,0 +1,14 @@
+@import "../../../index.css";
+
+.faq-search {
+  position: relative;
+}
+
+.faq-search input {
+  width: 100%;
+  border: 1px solid var(--color-black--);
+  border-radius: 6px;
+  outline: none;
+  padding: 4px 40px 4px 10px;
+  font-size: 15px;
+}

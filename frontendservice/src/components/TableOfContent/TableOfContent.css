@@ -1,0 +1,13 @@
+.note-content {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #5c94ea;
+}
+.note-content-color {
+    width: 4px;
+    height: 20px;
+    background-color: #5c94ea;
+    margin-right: 5px;
+    
+}

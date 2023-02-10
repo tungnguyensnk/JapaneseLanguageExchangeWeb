@@ -1,0 +1,31 @@
+@import "../../index.css";
+
+.faq-footer {
+  padding: 30px 12.5%;
+  background-color: var(--color-indigo-primary--);
+  color: var(--color-white--);
+}
+
+.faq-footer__top {
+  border-bottom: 2px solid var(--color-gray-secondary--);
+}
+
+.faq-footer__nav p:not(:first-of-type) {
+  opacity: .7;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.faq-footer__nav p:not(:first-of-type):hover {
+  text-decoration: underline;
+}
+
+.faq-footer__media li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-white--);
+}

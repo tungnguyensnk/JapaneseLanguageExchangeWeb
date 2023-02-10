@@ -1,0 +1,28 @@
+@import "../../index.css";
+
+.faq-navbar {
+  background-color: var(--color-indigo-primary--);
+  color: var(--color-white--);
+  font-weight: 700;
+}
+
+.faq-navbar .faq-navbar__nav {
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.faq-navbar__nav.faq-navbar__nav--selected {
+  position: relative;
+}
+
+.faq-navbar__nav--selected::before {
+  position: absolute;
+  content: '';
+  display: block;
+  bottom: -6px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: var(--color-white--);
+}
+

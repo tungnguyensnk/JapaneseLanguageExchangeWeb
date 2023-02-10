@@ -1,0 +1,18 @@
+@import "../../index.css";
+
+
+.faq-avatar {
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid var(--color-blue-secondary--);
+  padding: 2px;
+}
+
+.faq-avatar.faq-avatar--small {
+  width: 40px;
+  height: auto;
+}
+
+.faq-avatar--small img {
+  width: 100%;
+}

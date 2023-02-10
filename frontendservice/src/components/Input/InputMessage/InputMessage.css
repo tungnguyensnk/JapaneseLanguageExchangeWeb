@@ -1,0 +1,122 @@
+@import "../../../index.css";
+
+.faq-msg {
+  position: relative;
+  font-size: 14px;
+}
+
+.faq-msg input {
+  width: 97%;
+  padding-right: 90px;
+}
+
+.faq-msg__emoji {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-40%);
+}
+
+.faq-input-message {
+  padding: .6rem 1rem;
+  border-radius: 30px;
+  background-color: #edeff1;
+}
+
+.faq-emoji {
+  position: absolute;
+  bottom: 44px;
+  right: -40px;
+  z-index: 10;
+}
+
+.faq-kaomoji {
+  position: absolute;
+  right: 3.3rem;
+  top: 50%;
+  transform: translateY(-54%);
+  /*opacity: .4;*/
+  cursor: pointer;
+}
+
+.faq-kaomoji__box {
+  position: absolute;
+  bottom: 5rem;
+  right: -8rem;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-white--);
+  border: 1px solid var(--color-gray-zero--);
+  width: 500px;
+  height: 300px;
+  z-index: 100;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.faq-kaomoji__list, .faq-kaomoji__types {
+  width: 50px;
+  text-align: center;
+  border-right: 1px solid var(--color-gray-zero--);
+  height: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none !important;
+  scrollbar-color: var(--color-white--) !important;
+}
+
+.faq-kaomoji__name {
+  padding: 8px 0;
+  transition: var(--transition--);
+}
+
+.faq-kaomoji__name:hover, .faq-kaomoji__type:hover {
+  background-color: var(--color-gray-secondary--);
+}
+
+.faq-kaomoji__wrapper {
+  width: 400px;
+  height: 100%;
+
+}
+
+.faq-kaomoji__items {
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+  padding: 10px 20px;
+}
+
+.faq-kaomoji__type {
+  padding: 8px 4px;
+}
+
+.faq-kaomoji__icon {
+  display: inline-block;
+  padding: 5px 10px;
+  transition: var(--transition--);
+  border-radius: 5px;
+}
+
+.faq-kaomoji__icon:hover {
+  background-color: var(--color-gray-secondary--);
+}
+
+.faq-kaomoji__img {
+  margin: 0 auto;
+  width: 30px;
+}
+
+.faq-kaomoji--selected {
+  transition: var(--transition--);
+  background-color: var(--color-gray-secondary--);
+}
+
+.faq-kaomoji__items__title {
+  text-align: center;
+  width: 100%;
+  font-weight: 500;
+  padding: 10px 0;
+  background-color: var(--color-gray-primary--);
+  color: var(--color-white--);
+}

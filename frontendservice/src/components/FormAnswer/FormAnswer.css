@@ -1,0 +1,62 @@
+@import "../../index.css";
+
+.faq-comment-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+}
+
+.faq-comment__underline {
+  margin-left: 1em;
+  flex-grow: 1;
+  border-color: var(--color-gray-tertiary--);
+}
+
+.faq-input-border {
+  border: 2px solid #c5d9f7;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.faq-input-border__in {
+  display: flex;
+}
+
+.faq-post__avatar {
+  margin: 10px;
+  width: 50px;
+}
+
+.faq-input-comment {
+  padding: 8px 2.2rem 30px 8px;
+  width: 92%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  resize: none;
+  outline: none;
+  min-height: 80px;
+  vertical-align: top;
+  border: 2px solid #c5d9f7;
+  border-radius: 3px;
+  transition: border-color 0.1s ease-in;
+}
+
+.faq-button-comment {
+  border: 1px solid #5c94ea;
+  padding: 5px 10px 5px 10px;
+  border-radius: 4px;
+  background-color: #5c94ea;
+  color: #fff;
+  font-weight: 400;
+  display: block;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.faq-button-comment:hover {
+  background-color: #7ba3e1;
+  transition: 0.2s;
+}

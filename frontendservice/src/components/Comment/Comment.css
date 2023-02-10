@@ -1,0 +1,117 @@
+@import "../../index.css";
+
+
+
+
+.faq-input-border {
+  border: 2px solid #c5d9f7;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.faq-input-border__in {
+  display: flex;
+}
+
+.faq-post__avatar {
+  margin: 10px;
+  width: 50px;
+}
+
+.faq-input-comment {
+  padding: 8px 2.2rem 30px 8px;
+  width: 92%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  resize: none;
+  outline: none;
+  min-height: 80px;
+  vertical-align: top;
+  border: 2px solid #c5d9f7;
+  border-radius: 3px;
+  transition: border-color 0.1s ease-in;
+}
+
+.faq-button-comment {
+  border: 1px solid #5c94ea;
+  padding: 5px 10px 5px 10px;
+  border-radius: 4px;
+  background-color: #5c94ea;
+  color: #fff;
+  font-weight: 400;
+  display: block;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.faq-button-comment:hover {
+  background-color: #7ba3e1;
+  transition: 0.2s;
+}
+
+.faq-comment__name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0a5bd8;
+}
+
+.faq-tag_name {
+  font-size: 1rem;
+  opacity: 0.6;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.faq-input-border__author {
+  display: flex;
+}
+
+.faq-info__author {
+  margin-top: 10px;
+  height: 100%;
+}
+
+.faq-comment__time {
+  margin-bottom: 20px;
+  margin-left: 69px;
+  margin-top: -36px;
+  color: #625f5f;
+}
+
+.faq-comment__author {
+    margin-left: 10px;
+    font-size: 1.4rem;
+}
+
+.faq-comment-action {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.faq-comment-action__reply {
+    color: #5c94ea; 
+    margin-right: 5px
+}
+
+.faq-comment-action__reply:hover {
+    color: #474040;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: 0.2s;
+}
+
+.faq-comment-action__share {
+    margin-right: 5px;
+}
+
+.faq-comment-action__share:hover {
+    color: #7a7878;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.faq-comment-action__menu {
+    margin-left: 5px;    
+}

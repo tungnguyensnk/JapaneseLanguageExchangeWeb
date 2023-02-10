@@ -1,0 +1,13 @@
+@import "../../index.css";
+
+.faq-chat {
+  width: 700px;
+  position: fixed;
+  z-index: 1;
+  bottom: 1rem;
+  right: 5rem;
+  background-color: var(--color-white--);
+  border-radius: 10px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .5);
+  display: flex;
+}

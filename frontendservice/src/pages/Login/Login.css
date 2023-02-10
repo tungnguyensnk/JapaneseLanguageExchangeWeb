@@ -1,0 +1,183 @@
+body {
+  height: 100vh;
+  width: 100%;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
+}
+
+.wrap-container {
+  height: 100vh;
+  width: 100%;
+  background-image: url("../../assets/nui-phu-si.jpg");
+  background-size: cover;
+}
+
+.app {
+  outline: none;
+  box-sizing: border-box;
+  justify-content: center !important;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+input[type="text"],
+input[type="password"] {
+  height: 36px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.button-login {
+  cursor: pointer;
+  font-size: 15px;
+  background: #409eff;
+  border: 1px solid #01d28e;
+  color: #fff;
+  font-weight: 500;
+  padding: 7px 20px;
+  width: 100%;
+  border-radius: 4px;
+  border-color: #409eff;
+  text-align: center;
+}
+
+.button-login:hover {
+  background: #2287f0;
+  transition: linear 0.2s;
+}
+
+.login-form__webname {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin: 5px 100px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.login-form {
+  background-color: rgb(235 235 235 / 70%);
+  padding: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.list-container {
+  display: flex;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-container-detail {
+  line-height: normal;
+  display: inline-table;
+  display: flex;
+  border-collapse: initial;
+  border-spacing: 0;
+  margin-bottom: 1rem;
+}
+
+.form-container-detail__icon {
+  background-color: #f5f7fa;
+  color: #909399;
+  line-height: 1;
+  border: 1px solid #dcdfe6;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding: 8px 20px;
+}
+
+.form-container-detail__input {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border: 1px solid #dcdfe6;
+  padding: 10px 10px;
+  vertical-align: middle;
+  align-items: center;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.detail__icon {
+  margin-right: 10px;
+}
+
+.button-container {
+}
+
+.route-signin {
+  justify-content: space-between;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 1rem;
+  color: #0a5bd8;
+}
+
+.signin-another-form {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.signin-another-form__fill {
+  flex: 1 1 auto !important;
+}
+
+.signin-another-form__text {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.social-login-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.social-login-list__button {
+  display: flex;
+  align-items: center;
+  border: 1px solid #949494;
+  padding: 5px 15px 5px 10px;
+  border-radius: 4px;
+  width: 30%;
+  justify-content: center;
+}
+
+.social-login-list__button:hover {
+  /* color: #0a5bd8; */
+  background-color: #f4efef;
+  transition: all 0.2s;
+}
+
+.social-login {
+  margin-bottom: 20px;
+}
+
+.route-click:hover {
+  text-decoration: underline;
+}

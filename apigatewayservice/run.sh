@@ -1,2 +1,2 @@
 docker build -t apigateway .
-docker run -p 80:80 apigateway
+docker run -p 443:8443 apigateway

@@ -1,20 +1,18 @@
 version: "3.8"
 services:
-    coreService:
-        container_name: coreService
+    userService:
+        container_name: userService
         build:
-            context: ./coreservice
+            context: userservice
             dockerfile: Dockerfile
-        image: coreservice
+        image: userservice
         working_dir: /var/www/html
         entrypoint: /bin/sh -c "composer install &&
             php artisan key:generate &&
-            php artisan migrate &&
-            php artisan db:seed &&
             php artisan optimize &&
             php-fpm"
         volumes:
-            - ./coreservice:/var/www/html
+            - ./userservice:/var/www/html
         networks:
             - ltweb-network
         depends_on:
@@ -26,21 +24,22 @@ services:
         ports:
             - "8881:80"
         volumes:
-            - ./coreservice:/var/www/html
-            - ./coreservice/nginx.conf:/etc/nginx/conf.d/default.conf
+            - ./userservice:/var/www/html
+            - ./userservice/nginx.conf:/etc/nginx/conf.d/default.conf
         networks:
             - ltweb-network
         depends_on:
-            - coreService
+            - userService
 
     databaseService:
         container_name: databaseService
         image: postgres:latest
         env_file:
-            - ./coreservice/.env
+            - userservice/.env
         volumes:
             - ltweb-database:/data/postgres
             - ltweb-database:/var/lib/postgresql/data
+            - ./databaseservice:/docker-entrypoint-initdb.d
         ports:
             - "5432:5432"
         networks:
@@ -57,21 +56,85 @@ services:
         networks:
             - ltweb-network
 
-    videoCallService:
-        container_name: videoCallService
+    postService:
+        container_name: postService
         build:
-            context: ./videocallservice
+            context: ./postservice
             dockerfile: Dockerfile
+        volumes:
+            -   ./postservice:/app
         env_file:
-            -   ./coreservice/.env
+            - userservice/.env
         ports:
             - "8882:80"
-        image: videocallservice
+        image: postservice
         networks:
             - ltweb-network
         depends_on:
             - databaseService
-            - coreService
+            - userService
+
+    bookmarkService:
+        container_name: bookmarkService
+        build:
+            context: ./bookmarkservice
+            dockerfile: Dockerfile
+        volumes:
+            -   ./bookmarkservice:/app
+        env_file:
+            - userservice/.env
+        ports:
+            - "8883:80"
+        image: bookmarkservice
+        networks:
+            - ltweb-network
+        depends_on:
+            - databaseService
+            - userService
+    commentService:
+        container_name: commentService
+        build:
+            context: ./commentservice
+            dockerfile: Dockerfile
+        volumes:
+            -   ./commentservice:/app
+        env_file:
+            - userservice/.env
+        ports:
+            - "8884:80"
+        image: commentservice
+        networks:
+            - ltweb-network
+        depends_on:
+            - databaseService
+            - userService
+    notificationService:
+        container_name: notificationService
+        build:
+            context: ./notificationservice
+            dockerfile: Dockerfile
+        volumes:
+            -   ./notificationservice:/app
+        env_file:
+            - userservice/.env
+        ports:
+            - "8885:80"
+        image: notificationservice
+        networks:
+            - ltweb-network
+        depends_on:
+            - databaseService
+            - userService
+    frontendService:
+        container_name: frontendService
+        build:
+            context: ./frontendservice
+            dockerfile: Dockerfile
+        volumes:
+            -   ./frontendservice:/app
+        ports:
+            - "9999:3000"
+        image: frontendservice
 networks:
     ltweb-network:
         driver: bridge
