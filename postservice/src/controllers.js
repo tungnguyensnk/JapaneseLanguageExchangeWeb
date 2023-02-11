@@ -26,8 +26,7 @@ async function getNewestPost(req, res) {
                    where deleted = false
                      and locked = false
                    group by p.id
-                   order by p.id desc
-                   limit 5;`,
+                   order by p.id desc limit 5;`,
             values: [],
         }
         const result = await client.query(query);
@@ -41,7 +40,7 @@ async function getNewestPost(req, res) {
         return res.json(result.rows);
     } catch (e) {
         console.log(e);
-        return res.status(500).send('Internal Server Error');
+        return res.status(500).json({message: 'Internal Server Error'});
     }
 
 }
@@ -54,8 +53,8 @@ async function getUpdatePosts(req, res) {
                    from posts
                    where locked = false
                      and deleted = false
-                   order by id desc
-                   limit 50 offset $1`,
+                   order by id desc limit 50
+                   offset $1`,
             values: [(page - 1) * 10],
         }
         const result = await client.query(query);
@@ -68,8 +67,25 @@ async function getUpdatePosts(req, res) {
         return res.json(result.rows);
     } catch (e) {
         console.log(e);
-        return null;
+        return res.status(500).json({message: 'Internal Server Error'});
     }
 }
 
-module.exports = {getNewestPost, getUpdatePosts};
+async function createPost(req, res) {
+    if (!(req.user && req.body.title && req.body.content && req.body.type))
+        return res.status(400).json({message: 'Bad Request'});
+    try {
+        const query = {
+            text: `insert into posts (user_id, title, content, type, views, deleted, locked)
+                   values ($1, $2, $3, $4, $5, $6, $7)`,
+            values: [req.user, req.body.title, req.body.content, req.body.type, 0, false, false],
+        }
+        await client.query(query);
+        return res.status(201).json({message: 'Created'});
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({message: 'Internal Server Error'});
+    }
+}
+
+module.exports = {getNewestPost, getUpdatePosts, createPost};
