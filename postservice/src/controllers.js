@@ -88,4 +88,22 @@ async function createPost(req, res) {
     }
 }
 
-module.exports = {getNewestPost, getUpdatePosts, createPost};
+async function getPostById(req, res) {
+    const id = req.params.id;
+    try {
+        const query = {
+            text: `select p.*, u.name, u.email
+                   from posts p
+                            join users u on u.id = p.user_id
+                   where p.id = $1`,
+            values: [id],
+        }
+        const result = await client.query(query);
+        return res.json(result.rows[0]);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({message: 'Internal Server Error'});
+    }
+}
+
+module.exports = {getNewestPost, getUpdatePosts, createPost, getPostById};
