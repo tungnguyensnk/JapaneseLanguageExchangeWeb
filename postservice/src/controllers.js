@@ -44,7 +44,8 @@ async function getNewestPost(req, res) {
                    where deleted = false
                      and locked = false
                    group by p.id
-                   order by p.id desc limit 5;`,
+                   order by p.id desc
+                   limit 5;`,
             values: [],
         }
         const result = await client.query(query);
@@ -55,7 +56,7 @@ async function getNewestPost(req, res) {
             row.updated_at = dateFromNow(row.updated_at);
             row.likes_count = await getTotalLike(row.id);
         }
-        return res.json(result.rows);
+        return res.json({message: 'success', data: result.rows});
     } catch (e) {
         console.log(e);
         return res.status(500).json({message: 'Internal Server Error'});
@@ -71,8 +72,8 @@ async function getUpdatePosts(req, res) {
                    from posts
                    where locked = false
                      and deleted = false
-                   order by id desc limit 50
-                   offset $1`,
+                   order by id desc
+                   limit 50 offset $1`,
             values: [(page - 1) * 10],
         }
         const result = await client.query(query);
@@ -82,7 +83,7 @@ async function getUpdatePosts(req, res) {
             delete row.content;
             row.updated_at = dateFromNow(row.updated_at);
         }
-        return res.json(result.rows);
+        return res.json({message: 'success', data: result.rows});
     } catch (e) {
         console.log(e);
         return res.status(500).json({message: 'Internal Server Error'});
@@ -99,7 +100,7 @@ async function createPost(req, res) {
             values: [req.user, req.body.title, req.body.content, req.body.type, 0, false, false],
         }
         await client.query(query);
-        return res.status(201).json({message: 'Created'});
+        return res.status(200).json({message: 'success'});
     } catch (e) {
         console.log(e);
         return res.status(500).json({message: 'Internal Server Error'});
@@ -166,7 +167,7 @@ async function getPostById(req, res) {
         }
         result.rows[0].comments = $comments;
         result.rows[0].likes = $likes;
-        return res.json(result.rows[0]);
+        return res.json({message: 'success', data: result.rows[0]});
     } catch (e) {
         console.log(e);
         return res.status(500).json({message: 'Internal Server Error'});
@@ -186,24 +187,24 @@ async function searchPosts(req, res) {
                where type = $1
                  and deleted = false
                  and locked = false
-               order by id desc limit 10
-               offset $2`;
+               order by id desc
+               limit 10 offset $2`;
     else if (tsort === 'oldest')
         qry = `select *
                from posts
                where type = $1
                  and deleted = false
                  and locked = false
-               order by id asc limit 10
-               offset $2`;
+               order by id asc
+               limit 10 offset $2`;
     else if (tsort === 'most_viewed')
         qry = `select *
                from posts
                where type = $1
                  and deleted = false
                  and locked = false
-               order by views desc limit 10
-               offset $2`;
+               order by views desc
+               limit 10 offset $2`;
     else if (tsort === 'most_liked')
         qry = `select p.*, count(lp.user_id) as likes
                from posts p
@@ -212,8 +213,8 @@ async function searchPosts(req, res) {
                  and deleted = false
                  and locked = false
                group by p.id
-               order by likes desc limit 10
-               offset $2`;
+               order by likes desc
+               limit 10 offset $2`;
     else if (tsort === 'most_commented')
         qry = `select p.*, count(c.id) as comments
                from posts p
@@ -222,8 +223,8 @@ async function searchPosts(req, res) {
                  and deleted = false
                  and locked = false
                group by p.id
-               order by comments desc limit 10
-               offset $2`;
+               order by comments desc
+               limit 10 offset $2`;
     try {
         const query = {
             text: qry,
@@ -237,7 +238,7 @@ async function searchPosts(req, res) {
             row.updated_at = dateFromNow(row.updated_at);
         }
         let total_rows = result.rows.length;
-        return res.json({total_results: total_rows, results: result.rows});
+        return res.json({message: 'success', total_results: total_rows, results: result.rows});
     } catch (e) {
         console.log(e);
         return res.status(500).json({message: 'Internal Server Error'});

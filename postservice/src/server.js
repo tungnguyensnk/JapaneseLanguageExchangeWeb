@@ -21,9 +21,9 @@ client.connect((err) => {
     }
 });
 
-app.get('/newpost', getNewestPost);
-app.get('/post', getUpdatePosts);
-app.get('/post/:id', getPostById);
+app.get('/new', getNewestPost);
+app.get('/get', getUpdatePosts);
+app.get('/get/:id', getPostById);
 app.post('/create', checkToken, createPost);
 app.get('/search', searchPosts);
 

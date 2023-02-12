@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const {client} = require('./database');
 const {checkToken} = require('./middleware');
+const {getNotification} = require("./controllers");
 app.use((req, res, next) => {
     res.set('Timing-Allow-Origin', '*');
     res.set('Access-Control-Allow-Origin', '*');
@@ -23,6 +24,8 @@ client.connect((err) => {
 app.get('/test', (req, res) => {
     res.send('Notification Service is up and running');
 });
+
+app.get('/get', checkToken, getNotification);
 
 const port = process.env.USER_SERVER_PORT || '80';
 app.listen(port, () => {
