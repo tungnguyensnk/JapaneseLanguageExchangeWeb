@@ -91,13 +91,29 @@ async function getUpdatePosts(req, res) {
 }
 
 async function createPost(req, res) {
-    if (!(req.user && req.body.title && req.body.content && req.body.type))
+    if (!req.body.title || !req.body.content || !req.body.type)
         return res.status(400).json({message: 'Bad Request'});
     try {
         const query = {
             text: `insert into posts (user_id, title, content, type, views, deleted, locked)
                    values ($1, $2, $3, $4, $5, $6, $7)`,
             values: [req.user, req.body.title, req.body.content, req.body.type, 0, false, false],
+        }
+        await client.query(query);
+        return res.status(200).json({message: 'success'});
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({message: 'Internal Server Error'});
+    }
+}
+
+async function addView(req, res) {
+    try {
+        const query = {
+            text: `update posts
+                   set views = views + 1
+                   where id = $1`,
+            values: [req.params.id],
         }
         await client.query(query);
         return res.status(200).json({message: 'success'});
@@ -187,6 +203,7 @@ async function searchPosts(req, res) {
                where type = $1
                  and deleted = false
                  and locked = false
+                 and (title ilike $3 or content ilike $3)
                order by id desc
                limit 10 offset $2`;
     else if (tsort === 'oldest')
@@ -195,6 +212,7 @@ async function searchPosts(req, res) {
                where type = $1
                  and deleted = false
                  and locked = false
+                 and (title ilike $3 or content ilike $3)
                order by id asc
                limit 10 offset $2`;
     else if (tsort === 'most_viewed')
@@ -203,6 +221,7 @@ async function searchPosts(req, res) {
                where type = $1
                  and deleted = false
                  and locked = false
+                 and (title ilike $3 or content ilike $3)
                order by views desc
                limit 10 offset $2`;
     else if (tsort === 'most_liked')
@@ -212,6 +231,7 @@ async function searchPosts(req, res) {
                where type = $1
                  and deleted = false
                  and locked = false
+                 and (title ilike $3 or content ilike $3)
                group by p.id
                order by likes desc
                limit 10 offset $2`;
@@ -222,13 +242,14 @@ async function searchPosts(req, res) {
                where type = $1
                  and deleted = false
                  and locked = false
+                 and (title ilike $3 or content ilike $3)
                group by p.id
                order by comments desc
                limit 10 offset $2`;
     try {
         const query = {
             text: qry,
-            values: [type, (page - 1) * 10],
+            values: [type, (page - 1) * 10, '%' + req.body.content + '%'],
         }
         const result = await client.query(query);
         for (const row of result.rows) {
@@ -245,4 +266,4 @@ async function searchPosts(req, res) {
     }
 }
 
-module.exports = {getNewestPost, getUpdatePosts, createPost, getPostById, searchPosts};
+module.exports = {getNewestPost, getUpdatePosts, createPost, getPostById, searchPosts, addView};
