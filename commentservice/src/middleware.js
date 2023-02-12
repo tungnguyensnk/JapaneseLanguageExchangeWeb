@@ -9,7 +9,7 @@ async function getUserFromToken(token) {
     if (result.rows.length === 0) {
         return null;
     } else {
-        return result.rows[0];
+        return result.rows[0].tokenable_id;
     }
 }
 

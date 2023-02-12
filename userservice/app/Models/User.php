@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @method static find($id)
+ */
 class User extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;

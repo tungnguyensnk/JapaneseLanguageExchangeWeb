@@ -82,4 +82,16 @@ class UserController extends Controller
             'message' => 'Successfully logged out'
         ]);
     }
+
+    // get user by id
+    public function getUser(Request $request): JsonResponse
+    {
+        $request->validate([
+            'id' => 'required|integer'
+        ]);
+        $user = User::find($request->id);
+        return response()->json([
+            'user' => $user
+        ]);
+    }
 }

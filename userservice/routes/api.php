@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
+Route::get('user/{id}', [UserController::class, 'getUser']);
 Route::middleware('auth:sanctum')->get('profile', [UserController::class, 'profile']);
 Route::middleware('auth:sanctum')->post('logout', [UserController::class, 'logout']);
 Route::middleware('auth:sanctum')->post('bookmark', [BookmarkController::class, 'index']);
