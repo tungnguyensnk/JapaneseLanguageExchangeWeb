@@ -125,16 +125,16 @@ services:
         depends_on:
             - databaseService
             - userService
-    frontendService:
-        container_name: frontendService
-        build:
-            context: ./frontendservice
-            dockerfile: Dockerfile
-        volumes:
-            -   ./frontendservice:/app
-        ports:
-            - "9999:3000"
-        image: frontendservice
+#    frontendService:
+#        container_name: frontendService
+#        build:
+#            context: ./frontendservice
+#            dockerfile: Dockerfile
+#        volumes:
+#            -   ./frontendservice:/app
+#        ports:
+#            - "9999:3000"
+#        image: frontendservice
 networks:
     ltweb-network:
         driver: bridge
