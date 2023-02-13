@@ -45,7 +45,7 @@ async function getNewestPost(req, res) {
                      and locked = false
                    group by p.id
                    order by p.id desc
-                   limit 5;`,
+                       limit 5;`,
             values: [],
         }
         const result = await client.query(query);
@@ -74,7 +74,7 @@ async function getUpdatePosts(req, res) {
                    where locked = false
                      and p.deleted = false
                    order by p.id desc
-                   limit 50 offset $1`,
+                       limit 50 offset $1`,
             values: [(page - 1) * 10],
         }
         const result = await client.query(query);
@@ -126,10 +126,11 @@ async function getTotalCommentOfPost(post_id) {
 async function getCommentOfPost(post_id) {
     try {
         const query = {
-            text: `select *
-                   from comments
-                   where post_id = $1
-                     and parent_id is null`,
+            text: `select c.*, u.name
+                   from comments c
+                            join users u on u.id = c.user_id
+                   where c.post_id = $1
+                     and c.parent_id is null`,
             values: [post_id],
         }
         const result = await client.query(query);
@@ -183,51 +184,56 @@ async function searchPosts(req, res) {
         return res.status(400).json({message: 'Bad Request'});
     let qry = "";
     if (tsort === 'newest')
-        qry = `select *
-               from posts
+        qry = `select *, u.name
+               from posts p
+                        join users u on u.id = p.user_id
                where type = $1
-                 and deleted = false
+                 and p.deleted = false
                  and locked = false
                  and (title ilike $3 or content ilike $3)
-               order by id desc
+               order by p.id desc
                limit 10 offset $2`;
     else if (tsort === 'oldest')
-        qry = `select *
-               from posts
+        qry = `select *, u.name
+               from posts p
+                        join users u on u.id = p.user_id
                where type = $1
-                 and deleted = false
+                 and p.deleted = false
                  and locked = false
                  and (title ilike $3 or content ilike $3)
-               order by id asc
+               order by p.id
                limit 10 offset $2`;
     else if (tsort === 'most_viewed')
-        qry = `select *
-               from posts
+        qry = `select *, u.name
+               from posts p
+                        join users u on u.id = p.user_id
                where type = $1
-                 and deleted = false
+                 and p.deleted = false
                  and locked = false
                  and (title ilike $3 or content ilike $3)
                order by views desc
                limit 10 offset $2`;
     else if (tsort === 'most_liked')
-        qry = `select p.*, count(lp.user_id) as likes
+        qry = `select p.*, count(lp.user_id) as likes, u.name
                from posts p
                         join like_post lp on p.id = lp.post_id
+                        join users u on u.id = p.user_id
                where type = $1
-                 and deleted = false
+                 and p.deleted = false
                  and locked = false
                  and (title ilike $3 or content ilike $3)
                group by p.id
                order by likes desc
                limit 10 offset $2`;
     else if (tsort === 'most_commented')
-        qry = `select p.*, count(c.id) as comments
+        qry = `select p.*, count(c.id) as comments, u.name
                from posts p
                         join comments c on p.id = c.post_id
+                        join users u on u.id = p.user_id
                where type = $1
-                 and deleted = false
+                 and p.deleted = false
                  and locked = false
-                 and (title ilike $3 or content ilike $3)
+                 and (title ilike $3 or p.content ilike $3)
                group by p.id
                order by comments desc
                limit 10 offset $2`;

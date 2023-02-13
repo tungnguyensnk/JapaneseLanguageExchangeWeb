@@ -27,7 +27,7 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
             'phone' => $request->phone ?? 0,
             'address' => $request->address ?? '',
-            'role' => 1,
+            'role' => 0,
             'deleted' => 0,
             'avatar' => $request->avatar ?? '',
         ]);
