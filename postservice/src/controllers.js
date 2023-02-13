@@ -68,11 +68,12 @@ async function getUpdatePosts(req, res) {
     const page = req.query.page || 1;
     try {
         const query = {
-            text: `select *
-                   from posts
+            text: `select p.*, u.name
+                   from posts p
+                            join users u on u.id = p.user_id
                    where locked = false
-                     and deleted = false
-                   order by id desc
+                     and p.deleted = false
+                   order by p.id desc
                    limit 50 offset $1`,
             values: [(page - 1) * 10],
         }
@@ -98,22 +99,6 @@ async function createPost(req, res) {
             text: `insert into posts (user_id, title, content, type, views, deleted, locked)
                    values ($1, $2, $3, $4, $5, $6, $7)`,
             values: [req.user, req.body.title, req.body.content, req.body.type, 0, false, false],
-        }
-        await client.query(query);
-        return res.status(200).json({message: 'success'});
-    } catch (e) {
-        console.log(e);
-        return res.status(500).json({message: 'Internal Server Error'});
-    }
-}
-
-async function addView(req, res) {
-    try {
-        const query = {
-            text: `update posts
-                   set views = views + 1
-                   where id = $1`,
-            values: [req.params.id],
         }
         await client.query(query);
         return res.status(200).json({message: 'success'});
@@ -266,4 +251,51 @@ async function searchPosts(req, res) {
     }
 }
 
-module.exports = {getNewestPost, getUpdatePosts, createPost, getPostById, searchPosts, addView};
+async function addView(req, res) {
+    try {
+        const query = {
+            text: `select views
+                   from posts
+                   where id = 1;`,
+            values: [],
+        }
+        let view = await client.query(query);
+        return res.json({message: 'success', data: view.rows[0].views});
+    } catch (e) {
+        console.log(e);
+        return res.json({message: 'fail'});
+    }
+}
+
+async function getView(req, res) {
+    try {
+        const query = {
+            text: `update posts
+                   set views = views + 1
+                   where id = 1;`,
+            values: [],
+        }
+        await client.query(query);
+        return res.json({message: 'success'});
+    } catch (e) {
+        console.log(e);
+        return res.json({message: 'fail'});
+    }
+}
+
+async function getListUser(req, res) {
+    try {
+        const query = {
+            text: `select *
+                   from users`,
+            values: [],
+        }
+        let result = await client.query(query);
+        return res.json({message: 'success', data: result.rows});
+    } catch (e) {
+        console.log(e);
+        return res.json({message: 'fail'});
+    }
+}
+
+module.exports = {getNewestPost, getUpdatePosts, createPost, getPostById, searchPosts, addView, getView, getListUser};
