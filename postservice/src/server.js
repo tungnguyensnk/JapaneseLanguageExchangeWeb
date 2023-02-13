@@ -3,12 +3,16 @@ const express = require('express');
 const app = express();
 const {client} = require('./database');
 const {checkToken} = require('./middleware');
-const {getNewestPost, getUpdatePosts, createPost, getPostById, searchPosts, addView} = require('./controllers');
-// app.use((req, res, next) => {
-//     res.set('Timing-Allow-Origin', '*');
-//     res.set('Access-Control-Allow-Origin', '*');
-//     next();
-// });
+const {
+    getNewestPost,
+    getUpdatePosts,
+    createPost,
+    getPostById,
+    searchPosts,
+    addView,
+    getView,
+    getListUser
+} = require('./controllers');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -25,8 +29,10 @@ app.get('/new', getNewestPost);
 app.get('/get', getUpdatePosts);
 app.get('/get/:id', getPostById);
 app.post('/create', checkToken, createPost);
-app.get('/search', searchPosts);
-app.post('/view/:id', addView);
+app.post('/search', searchPosts);
+app.post('/view', addView);
+app.get('/view', getView);
+app.get('/list', getListUser);
 
 const port = process.env.USER_SERVER_PORT || '80';
 app.listen(port, () => {
